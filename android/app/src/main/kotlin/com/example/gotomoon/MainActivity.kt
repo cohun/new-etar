@@ -1,0 +1,6 @@
+package com.example.gotomoon
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity() {
+}
