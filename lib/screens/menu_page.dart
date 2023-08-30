@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gotomoon/components/button.dart';
+import 'package:gotomoon/src/widgets.dart';
 import 'package:gotomoon/theme/colors.dart';
 
 class MenuPage extends StatefulWidget {
@@ -17,6 +18,7 @@ class _MenuPageState extends State<MenuPage> {
       appBar: AppBar(
         toolbarHeight: 90,
         backgroundColor: Colors.transparent,
+        foregroundColor: Color.fromARGB(255, 199, 179, 119),
         elevation: 0,
         centerTitle: true,
         title: Image.asset(
@@ -24,8 +26,8 @@ class _MenuPageState extends State<MenuPage> {
           width: 100,
         ),
       ),
-      body: Column(
-        children: [
+      body: ListView(
+        children: <Widget>[
           SizedBox(height: 32),
           Container(
             margin: EdgeInsets.symmetric(horizontal: 25),
@@ -57,7 +59,21 @@ class _MenuPageState extends State<MenuPage> {
                 )
               ],
             ),
-          )
+          ),
+          const SizedBox(height: 8),
+          const IconAndDetail(Icons.calendar_today, 'October 30'),
+          const IconAndDetail(Icons.location_city, 'San Francisco'),
+          const Divider(
+            height: 8,
+            thickness: 1,
+            indent: 8,
+            endIndent: 8,
+            color: Colors.grey,
+          ),
+          const Header("What we'll be doing"),
+          const Paragraph(
+            'Join us for a day full of Firebase Workshops and Pizza!',
+          ),
         ],
       ),
     );
