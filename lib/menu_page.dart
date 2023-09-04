@@ -33,12 +33,24 @@ class _MenuPageState extends State<MenuPage> {
       body: ListView(
         children: <Widget>[
           SizedBox(height: 32),
-          Image.asset(
-            "images/anonymous.png",
-            height: 200,
+          Consumer<ApplicationState>(
+            builder: (context, appState, _) => appState.loggedIn
+                ? Image.asset(
+                    "images/image.jpg",
+                    height: 200,
+                  )
+                : Image.asset(
+                    "images/anonymous.png",
+                    height: 200,
+                  ),
           ),
           const SizedBox(height: 28),
-          const IconAndDetail(Icons.account_box, 'Felhasználó neve'),
+          Consumer<ApplicationState>(
+            builder: (context, appState, _) => appState.loggedIn
+                ? IconAndDetail(Icons.account_box,
+                    FirebaseAuth.instance.currentUser!.displayName ?? '')
+                : const IconAndDetail(Icons.account_box, 'Felhasználó '),
+          ),
           const IconAndDetail(Icons.location_city, 'Cégnév'),
           const SizedBox(height: 28),
           Consumer<ApplicationState>(
@@ -58,14 +70,18 @@ class _MenuPageState extends State<MenuPage> {
           ),
           const Header("Bejelentkezés után..."),
           const Paragraph(
-            'A felhasználói fiók létrehozása után történik a cégnév megadása.',
+            'A felhasználói fiók létrehozása után történik a saját név és a cégnév megadása.',
           ),
           Consumer<ApplicationState>(
               builder: (context, appState, _) => appState.loggedIn
-                  ? Text(
-                      'Here',
-                      style: TextStyle(color: Colors.amber),
-                    )
+                  ? Builder(builder: (context) {
+                      var name = FirebaseAuth.instance.currentUser!.displayName;
+                      print(name);
+                      return Text(
+                        'Here',
+                        style: TextStyle(color: Colors.amber),
+                      );
+                    })
                   : Text('not', style: TextStyle(color: Colors.amber))),
         ],
       ),

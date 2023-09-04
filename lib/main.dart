@@ -89,6 +89,43 @@ final _router = GoRouter(
               path: 'sign-in',
               builder: (context, state) {
                 return SignInScreen(
+                  headerBuilder: (context, constraints, shrinkOffset) {
+                    return Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: AspectRatio(
+                        aspectRatio: 1,
+                        child: Image.asset('images/image.jpg'),
+                      ),
+                    );
+                  },
+                  subtitleBuilder: (context, action) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: action == AuthAction.signIn
+                          ? const Text(
+                              'Üdvözlünk az ETAR applikációban, jelenkezz be a fiókodba!')
+                          : const Text(
+                              'Üdvözlünk az ETAR applikációban, hozz létre egy fiókot!'),
+                    );
+                  },
+                  footerBuilder: (context, action) {
+                    return const Padding(
+                      padding: EdgeInsets.only(top: 16),
+                      child: Text(
+                        'Amennyiben továbblépsz, elfogadod a felhasználási feltételeket, valamint az adatvédelmi irányelveket.',
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                    );
+                  },
+                  sideBuilder: (context, shrinkOffset) {
+                    return Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: AspectRatio(
+                        aspectRatio: 1,
+                        child: Image.asset('images/image.jpg'),
+                      ),
+                    );
+                  },
                   actions: [
                     ForgotPasswordAction(((context, email) {
                       final uri = Uri(
@@ -140,6 +177,9 @@ final _router = GoRouter(
               path: 'profile',
               builder: (context, state) {
                 return ProfileScreen(
+                  appBar: AppBar(
+                    title: const Text('User Profile'),
+                  ),
                   providers: const [],
                   actions: [
                     SignedOutAction((context) {
