@@ -70,19 +70,35 @@ class _MenuPageState extends State<MenuPage> {
           ),
           const Header("Bejelentkezés után..."),
           const Paragraph(
-            'A felhasználói fiók létrehozása után történik a saját név és a cégnév megadása.',
+            'A felhasználói fiókhoz meg kell adni a saját nevet és a cégnevét, amelynek adatain dolgozni szeretnénk.',
           ),
-          Consumer<ApplicationState>(
-              builder: (context, appState, _) => appState.loggedIn
-                  ? Builder(builder: (context) {
-                      var name = FirebaseAuth.instance.currentUser!.displayName;
-                      print(name);
-                      return Text(
-                        'Here',
-                        style: TextStyle(color: Colors.amber),
-                      );
-                    })
-                  : Text('not', style: TextStyle(color: Colors.amber))),
+          SizedBox(height: 32,),
+          Center(
+            child: Consumer<ApplicationState>(
+            builder: (context, appState, _) =>  (appState.loggedIn == true) ?
+             
+              Row(
+                
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 28, bottom: 8),
+                    child: FilledButton(onPressed: () {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Jelentkezz be először!")));
+                    }, child: Text("Meglévő cég"),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 28, bottom: 8),
+                    child: ElevatedButton(onPressed: () {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Jelentkezz be először!")));
+                    }, child: Text("Új cég"),
+                    ),
+                  ),
+                ],
+              ) : Text("Hi"),
+            ),
+          ),
+          
         ],
       ),
     );

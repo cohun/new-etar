@@ -178,7 +178,7 @@ final _router = GoRouter(
               builder: (context, state) {
                 return ProfileScreen(
                   appBar: AppBar(
-                    title: const Text('User Profile'),
+                    title: const Text('Felhasználó neve:'),
                   ),
                   providers: const [],
                   actions: [
